@@ -3,13 +3,20 @@ import { TouchableOpacity } from "react-native"
 import { Heading, HStack, Text, VStack, Icon } from "native-base"
 import { MaterialIcons } from "@expo/vector-icons"
 
+import defaultUserPhotoImg from "@assets/userPhotoDefault.png"
+
 import { UserPhoto } from "./UserPhoto"
+import { useAuth } from "@hooks/useAuth"
 
 export function HomeHeader(){
+    
+    const {user} = useAuth();
+
+
     return(
         <HStack bg="gray.600" pt={16} pb={5} px={8} alignItems="center">
            <UserPhoto
-           source={{uri:'https://github.com/guipaterno.png'}}
+           source={user.avatar ? {uri:user.avatar}: defaultUserPhotoImg}
            alt="Image do usuário"
            size={16}
            mr={4}
@@ -21,7 +28,7 @@ export function HomeHeader(){
             </Text>
 
         <Heading color="gray.100" fontSize="md" fontFamily="heading">
-            Guilherme
+            {user.name}
         </Heading>
             </VStack>
             
